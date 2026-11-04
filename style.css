@@ -1,0 +1,310 @@
+
+/* ===== CSS VARIABLES ===== */
+:root {
+    --primary: #101b3d;
+    --accent: #f5b942;
+    --orange: #e65320;
+    --background: #f4f6fa;
+    --text: #26334a;
+    --white: #ffffff;
+}
+
+/* ===== GENERAL STYLING ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 90px;
+}
+
+body {
+    background: var(--background);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+/* ===== NAVIGATION BAR ===== */
+header {
+    background: var(--primary);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 7%;
+}
+
+nav h2 {
+    color: var(--accent);
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 25px;
+}
+
+nav ul li a {
+    color: var(--white);
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+nav ul li a:hover {
+    color: var(--accent);
+}
+
+/* ===== HERO SECTION ===== */
+.hero {
+    margin-top: 65px;
+    min-height: 400px;
+    background: linear-gradient(
+        135deg,
+        var(--primary),
+        var(--orange)
+    );
+    color: var(--white);
+    text-align: center;
+    padding: 110px 20px;
+}
+
+.hero h1 {
+    font-size: 38px;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    margin-bottom: 25px;
+    font-size: 18px;
+}
+
+/* ===== BUTTONS ===== */
+.btn, .book-btn {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--primary);
+    padding: 11px 22px;
+    margin: 8px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn:hover, .book-btn:hover {
+    background: var(--white);
+    transform: translateY(-3px);
+}
+
+/* ===== GENERAL SECTIONS ===== */
+.section {
+    padding: 60px 7%;
+}
+
+.section h2 {
+    color: var(--primary);
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 28px;
+}
+
+.section h3 {
+    color: var(--orange);
+    margin: 18px 0 10px;
+}
+
+.section ul {
+    padding-left: 25px;
+}
+
+/* ===== MATCH TABLE ===== */
+.table-container {
+    overflow-x: auto;
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--white);
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th {
+    background: var(--primary);
+    color: var(--white);
+    padding: 15px;
+}
+
+td {
+    padding: 13px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+    background: #fff5df;
+}
+
+/* ===== TEAM FILTER ===== */
+#teamFilter {
+    padding: 10px;
+    margin: 12px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* ===== BOOKING SECTION ===== */
+.booking-container {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+form, .summary {
+    background: var(--white);
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    flex: 1;
+    min-width: 280px;
+    max-width: 500px;
+}
+
+form label {
+    display: block;
+    margin: 12px 0 5px;
+    font-weight: bold;
+}
+
+form input, form select {
+    width: 100%;
+    padding: 11px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+form input:focus, form select:focus {
+    border-color: var(--orange);
+}
+
+form button {
+    width: 100%;
+    background: var(--orange);
+    color: var(--white);
+    border: none;
+    padding: 13px;
+    margin-top: 20px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+form button:hover {
+    background: var(--primary);
+}
+
+/* ===== BOOKING SUMMARY ===== */
+.summary h3 {
+    color: var(--primary);
+    margin-bottom: 15px;
+}
+
+.summary p {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+#total {
+    color: var(--orange);
+    font-weight: bold;
+}
+
+/* ===== GUIDELINES CARDS ===== */
+.guideline-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card {
+    background: var(--white);
+    padding: 25px;
+    border-radius: 10px;
+    flex: 1;
+    min-width: 220px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border-top: 4px solid var(--accent);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* ===== FOOTER ===== */
+footer {
+    background: var(--primary);
+    color: var(--white);
+    text-align: center;
+    padding: 22px;
+    margin-top: 30px;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+    }
+
+    .hero {
+        margin-top: 110px;
+        padding: 80px 15px 70px;
+    }
+
+    .hero h1 {
+        font-size: 27px;
+    }
+
+    .section {
+        padding: 40px 5%;
+    }
+
+    .booking-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    form, .summary {
+        max-width: 100%;
+        width: 100%;
+    }
+}
