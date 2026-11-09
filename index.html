@@ -1,4 +1,7 @@
 
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +18,7 @@
         <h2>IPL TICKETS 🏏</h2>
         <ul>
             <li><a href="#matches">Matches</a></li>
-            <li><a href="#booking">Book Ticket</a></li>
+            <li><a href="booking.html">Book Ticket</a></li>
             <li><a href="#mybookings">My Bookings</a></li>
             <li><a href="#guidelines">Guidelines</a></li>
         </ul>
@@ -27,14 +30,16 @@
     <h1>Experience The Stadium Energy Live!</h1>
     <p>Be part of the excitement. Book your IPL tickets now!</p>
     <a href="#matches" class="btn">View Schedule</a>
-    <a href="#booking" class="btn">Book Ticket</a>
+    <a href="booking.html" class="btn">Book Now</a>
 </section>
 
 <!-- About IPL -->
 <section class="section" id="about">
     <h2>About IPL 2026</h2>
-    <p>Indian Premier League brings together the best cricket teams
-       for an exciting cricket experience.</p>
+    <p>
+        Indian Premier League brings together the best cricket teams
+        for an exciting cricket experience.
+    </p>
 
     <h3>Popular Teams</h3>
     <ul>
@@ -81,6 +86,7 @@
                     <th>Action</th>
                 </tr>
             </thead>
+
             <tbody>
                 <tr data-teams="CSK MI">
                     <td>1</td>
@@ -90,7 +96,7 @@
                     <td>₹800</td>
                     <td>₹1500</td>
                     <td>₹3000</td>
-                    <td><a href="#booking" class="book-btn">Book</a></td>
+                    <td><a href="booking.html" class="book-btn">Book</a></td>
                 </tr>
 
                 <tr data-teams="RCB KKR">
@@ -101,7 +107,7 @@
                     <td>₹1000</td>
                     <td>₹2000</td>
                     <td>₹4000</td>
-                    <td><a href="#booking" class="book-btn">Book</a></td>
+                    <td><a href="booking.html" class="book-btn">Book</a></td>
                 </tr>
 
                 <tr data-teams="MI RCB">
@@ -112,7 +118,7 @@
                     <td>₹900</td>
                     <td>₹1800</td>
                     <td>₹3500</td>
-                    <td><a href="#booking" class="book-btn">Book</a></td>
+                    <td><a href="booking.html" class="book-btn">Book</a></td>
                 </tr>
             </tbody>
         </table>
@@ -124,7 +130,9 @@
     <h2>Book Your Tickets</h2>
 
     <div class="booking-container">
+
         <form id="bookingForm">
+
             <label for="match">Select Match:</label>
             <select id="match" required>
                 <option value="">Choose Match</option>
@@ -155,6 +163,7 @@
             <input type="tel" id="phone" required>
 
             <button type="submit">Confirm Booking</button>
+
         </form>
 
         <!-- Booking Summary -->
@@ -166,6 +175,7 @@
             <p>Quantity: <span id="summaryQuantity">1</span></p>
             <h3>Total: ₹<span id="total">0</span></h3>
         </div>
+
     </div>
 </section>
 
@@ -184,6 +194,7 @@
                 <th>Amount</th>
             </tr>
         </thead>
+
         <tbody id="bookingRecords">
             <tr>
                 <td colspan="6">No bookings yet.</td>
@@ -197,6 +208,7 @@
     <h2>Booking Guidelines</h2>
 
     <div class="guideline-container">
+
         <div class="card">
             <h3>Ticket Verification</h3>
             <p>Carry your valid ticket for verification at the stadium.</p>
@@ -211,6 +223,7 @@
             <h3>Prohibited Items</h3>
             <p>Outside food, sharp objects and dangerous items are not allowed.</p>
         </div>
+
     </div>
 </section>
 
@@ -220,6 +233,7 @@
 </footer>
 
 <script>
+
 // Team Filter
 function filterMatches() {
     let filter = document.getElementById("teamFilter").value;
@@ -227,6 +241,7 @@ function filterMatches() {
 
     rows.forEach(row => {
         let teams = row.dataset.teams;
+
         row.style.display =
             filter === "all" || teams.includes(filter) ? "" : "none";
     });
@@ -248,8 +263,10 @@ function updateSummary() {
 
     document.getElementById("summaryMatch").textContent =
         match || "Not selected";
+
     document.getElementById("summaryStand").textContent =
         stand || "Not selected";
+
     document.getElementById("summaryPrice").textContent = price;
     document.getElementById("summaryQuantity").textContent = quantity;
     document.getElementById("total").textContent = price * quantity;
@@ -274,6 +291,7 @@ document.getElementById("bookingForm").addEventListener("submit", function(e) {
     }
 
     let row = table.insertRow();
+
     row.innerHTML = `
         <td>${Date.now()}</td>
         <td></td>
@@ -288,11 +306,13 @@ document.getElementById("bookingForm").addEventListener("submit", function(e) {
     row.cells[3].textContent = stand;
 
     alert("Booking added successfully!");
+
     this.reset();
     updateSummary();
 });
 
 updateSummary();
+
 </script>
 
 </body>

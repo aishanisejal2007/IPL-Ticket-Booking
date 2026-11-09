@@ -1,0 +1,296 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPL Ticket Booking</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f2f4f8;
+            color: #222;
+        }
+
+        header {
+            background: #101c3a;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin-bottom: 10px;
+        }
+
+        nav {
+            background: #172b55;
+            padding: 12px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #ffcc00;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 650px;
+            background: white;
+            margin: 35px auto;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+        }
+
+        .container h2 {
+            text-align: center;
+            color: #101c3a;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 7px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #bbb;
+            border-radius: 5px;
+            font-size: 15px;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #172b55;
+        }
+
+        fieldset {
+            border: 1px solid #bbb;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        legend {
+            font-weight: bold;
+            padding: 0 5px;
+        }
+
+        .radio-option {
+            display: inline-flex;
+            align-items: center;
+            margin: 8px 18px 0 0;
+            gap: 6px;
+        }
+
+        .radio-option input {
+            width: auto;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .submit-btn {
+            background: #e63946;
+            color: white;
+        }
+
+        .submit-btn:hover {
+            background: #c82333;
+        }
+
+        .reset-btn {
+            background: #ddd;
+            color: #222;
+        }
+
+        .reset-btn:hover {
+            background: #bbb;
+        }
+
+        #confirmation {
+            color: green;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        footer {
+            background: #101c3a;
+            color: white;
+            text-align: center;
+            padding: 18px;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            nav a {
+                display: inline-block;
+                margin: 6px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>IPL Ticket Booking</h1>
+        <p>Book your favourite IPL match tickets!</p>
+    </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="index.html#matches">Matches</a>
+        <a href="booking.html">Book Tickets</a>
+    </nav>
+
+    <div class="container">
+        <h2>Ticket Booking Form</h2>
+
+        <form action="#" method="get" onsubmit="return showConfirmation();">
+
+            <div class="form-group">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name"
+                       minlength="3" maxlength="40" required
+                       placeholder="Enter your full name">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email"
+                       required placeholder="Enter your email">
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone"
+                       pattern="[0-9]{10}"
+                       minlength="10" maxlength="10"
+                       title="Please enter exactly 10 digits"
+                       required placeholder="Enter 10-digit phone number">
+            </div>
+
+            <div class="form-group">
+                <label for="match">Select Match:</label>
+                <select id="match" name="match" required>
+                    <option value="">-- Choose a Match --</option>
+                    <option value="RCB vs CSK">RCB vs CSK</option>
+                    <option value="MI vs KKR">MI vs KKR</option>
+                    <option value="SRH vs RR">SRH vs RR</option>
+                    <option value="DC vs PBKS">DC vs PBKS</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="stand">Stand Category:</label>
+                <select id="stand" name="stand" required>
+                    <option value="">-- Select Stand --</option>
+                    <option value="General">General</option>
+                    <option value="Premium">Premium</option>
+                    <option value="VIP">VIP</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="tickets">Number of Tickets:</label>
+                <input type="number" id="tickets" name="tickets"
+                       min="1" max="10" value="1" required>
+            </div>
+
+            <fieldset>
+                <legend>Ticket Preference</legend>
+
+                <label class="radio-option">
+                    <input type="radio" name="preference"
+                           value="Regular" required>
+                    Regular
+                </label>
+
+                <label class="radio-option">
+                    <input type="radio" name="preference"
+                           value="Family">
+                    Family
+                </label>
+            </fieldset>
+
+            <div class="buttons">
+                <button type="submit" class="submit-btn">
+                    Book Now
+                </button>
+
+                <button type="reset" class="reset-btn"
+                        onclick="clearConfirmation()">
+                    Reset
+                </button>
+            </div>
+
+            <p id="confirmation" aria-live="polite"></p>
+
+        </form>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 IPL Ticket Booking. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        function showConfirmation() {
+            document.getElementById("confirmation").textContent =
+                "Booking details submitted successfully! Thank you for choosing IPL.";
+
+            return false;
+        }
+
+        function clearConfirmation() {
+            document.getElementById("confirmation").textContent = "";
+        }
+    </script>
+
+</body>
+</html>
