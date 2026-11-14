@@ -1,15 +1,15 @@
 
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IPL 2026 Ticket Booking</title>
+
     <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
 </head>
+
 <body>
 
 <!-- Navigation Bar -->
@@ -29,6 +29,7 @@
 <section class="hero">
     <h1>Experience The Stadium Energy Live!</h1>
     <p>Be part of the excitement. Book your IPL tickets now!</p>
+
     <a href="#matches" class="btn">View Schedule</a>
     <a href="booking.html" class="btn">Book Now</a>
 </section>
@@ -36,6 +37,7 @@
 <!-- About IPL -->
 <section class="section" id="about">
     <h2>About IPL 2026</h2>
+
     <p>
         Indian Premier League brings together the best cricket teams
         for an exciting cricket experience.
@@ -64,7 +66,8 @@
     <h2>Match Schedule</h2>
 
     <label for="teamFilter">Filter by Team:</label>
-    <select id="teamFilter" onchange="filterMatches()">
+
+    <select id="teamFilter">
         <option value="all">All Teams</option>
         <option value="CSK">Chennai Super Kings</option>
         <option value="MI">Mumbai Indians</option>
@@ -96,7 +99,7 @@
                     <td>₹800</td>
                     <td>₹1500</td>
                     <td>₹3000</td>
-                    <td><a href="booking.html" class="book-btn">Book</a></td>
+                    <td><a href="#booking" class="book-btn">Book</a></td>
                 </tr>
 
                 <tr data-teams="RCB KKR">
@@ -107,7 +110,7 @@
                     <td>₹1000</td>
                     <td>₹2000</td>
                     <td>₹4000</td>
-                    <td><a href="booking.html" class="book-btn">Book</a></td>
+                    <td><a href="#booking" class="book-btn">Book</a></td>
                 </tr>
 
                 <tr data-teams="MI RCB">
@@ -118,7 +121,7 @@
                     <td>₹900</td>
                     <td>₹1800</td>
                     <td>₹3500</td>
-                    <td><a href="booking.html" class="book-btn">Book</a></td>
+                    <td><a href="#booking" class="book-btn">Book</a></td>
                 </tr>
             </tbody>
         </table>
@@ -169,10 +172,12 @@
         <!-- Booking Summary -->
         <div class="summary">
             <h3>Booking Summary</h3>
+
             <p>Match: <span id="summaryMatch">Not selected</span></p>
             <p>Stand: <span id="summaryStand">Not selected</span></p>
             <p>Ticket Price: ₹<span id="summaryPrice">0</span></p>
             <p>Quantity: <span id="summaryQuantity">1</span></p>
+
             <h3>Total: ₹<span id="total">0</span></h3>
         </div>
 
@@ -231,89 +236,6 @@
 <footer>
     <p>&copy; 2026 IPL Ticket Booking. All Rights Reserved.</p>
 </footer>
-
-<script>
-
-// Team Filter
-function filterMatches() {
-    let filter = document.getElementById("teamFilter").value;
-    let rows = document.querySelectorAll("#matchTable tbody tr");
-
-    rows.forEach(row => {
-        let teams = row.dataset.teams;
-
-        row.style.display =
-            filter === "all" || teams.includes(filter) ? "" : "none";
-    });
-}
-
-// Ticket Prices
-const prices = {
-    General: 800,
-    Premium: 1500,
-    VIP: 3000
-};
-
-// Update Booking Summary
-function updateSummary() {
-    let match = document.getElementById("match").value;
-    let stand = document.getElementById("stand").value;
-    let quantity = Number(document.getElementById("quantity").value) || 0;
-    let price = prices[stand] || 0;
-
-    document.getElementById("summaryMatch").textContent =
-        match || "Not selected";
-
-    document.getElementById("summaryStand").textContent =
-        stand || "Not selected";
-
-    document.getElementById("summaryPrice").textContent = price;
-    document.getElementById("summaryQuantity").textContent = quantity;
-    document.getElementById("total").textContent = price * quantity;
-}
-
-document.getElementById("bookingForm").addEventListener("input", updateSummary);
-
-// Save Booking in Table
-document.getElementById("bookingForm").addEventListener("submit", function(e) {
-    e.preventDefault();
-
-    let match = document.getElementById("match").value;
-    let stand = document.getElementById("stand").value;
-    let quantity = Number(document.getElementById("quantity").value);
-    let name = document.getElementById("name").value;
-    let amount = prices[stand] * quantity;
-
-    let table = document.getElementById("bookingRecords");
-
-    if (table.querySelector("td[colspan]")) {
-        table.innerHTML = "";
-    }
-
-    let row = table.insertRow();
-
-    row.innerHTML = `
-        <td>${Date.now()}</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>${quantity}</td>
-        <td>₹${amount}</td>
-    `;
-
-    row.cells[1].textContent = name;
-    row.cells[2].textContent = match;
-    row.cells[3].textContent = stand;
-
-    alert("Booking added successfully!");
-
-    this.reset();
-    updateSummary();
-});
-
-updateSummary();
-
-</script>
 
 </body>
 </html>
