@@ -1,6 +1,6 @@
-// Reusable Toast Notification Function
-function showToast(message) {
 
+// ===== REUSABLE TOAST NOTIFICATION =====
+function showToast(message) {
     let toast = document.getElementById("toast");
 
     if (!toast) {
@@ -11,12 +11,12 @@ function showToast(message) {
             position: fixed;
             bottom: 30px;
             right: 30px;
-            background: #101c3a;
+            background: #101b3d;
             color: white;
             padding: 15px 25px;
             border-radius: 8px;
             font-size: 15px;
-            z-index: 1000;
+            z-index: 2000;
             opacity: 0;
             transition: opacity 0.4s ease;
         `;
@@ -35,16 +35,73 @@ function showToast(message) {
 }
 
 
-// Main JavaScript Functionality
+// ===== MAIN JAVASCRIPT FUNCTIONALITY =====
 document.addEventListener("DOMContentLoaded", function () {
 
-    // Smooth Scrolling and Toast Notification
+    // ===== HAMBURGER MENU =====
+    const menuToggle = document.getElementById("menuToggle");
+    const navMenu = document.getElementById("navMenu");
+
+    if (menuToggle && navMenu) {
+        menuToggle.addEventListener("click", function () {
+            navMenu.classList.toggle("show-menu");
+
+            const isExpanded = navMenu.classList.contains("show-menu");
+
+            menuToggle.setAttribute("aria-expanded", isExpanded);
+            menuToggle.textContent = isExpanded ? "✕" : "☰";
+        });
+
+        navMenu.querySelectorAll("a").forEach(function (link) {
+            link.addEventListener("click", function () {
+                navMenu.classList.remove("show-menu");
+                menuToggle.setAttribute("aria-expanded", "false");
+                menuToggle.textContent = "☰";
+            });
+        });
+    }
+
+
+    // ===== TEAM FILTER =====
+    const teamFilter = document.getElementById("teamFilter");
+
+    if (teamFilter) {
+        teamFilter.addEventListener("change", filterMatches);
+    }
+
+
+    // ===== GRID AND LIST VIEW =====
+    const matchGrid = document.getElementById("matchGrid");
+    const gridViewBtn = document.getElementById("gridViewBtn");
+    const listViewBtn = document.getElementById("listViewBtn");
+
+    if (matchGrid && gridViewBtn && listViewBtn) {
+
+        gridViewBtn.addEventListener("click", function () {
+            matchGrid.classList.remove("list-view");
+
+            gridViewBtn.classList.add("active-view");
+            listViewBtn.classList.remove("active-view");
+
+            showToast("Grid view enabled!");
+        });
+
+        listViewBtn.addEventListener("click", function () {
+            matchGrid.classList.add("list-view");
+
+            listViewBtn.classList.add("active-view");
+            gridViewBtn.classList.remove("active-view");
+
+            showToast("List view enabled!");
+        });
+    }
+
+
+    // ===== SMOOTH SCROLLING AND BOOK BUTTONS =====
     const bookButtons = document.querySelectorAll(".book-btn");
 
     bookButtons.forEach(function (button) {
-
         button.addEventListener("click", function (event) {
-
             event.preventDefault();
 
             const bookingSection = document.getElementById("booking");
@@ -60,15 +117,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 
-    // Team Filter
-    const teamFilter = document.getElementById("teamFilter");
-
-    if (teamFilter) {
-        teamFilter.addEventListener("change", filterMatches);
-    }
-
-
-    // Ticket Prices
+    // ===== TICKET PRICES =====
     const prices = {
         General: 800,
         Premium: 1500,
@@ -76,13 +125,13 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
 
-    // Booking Form
+    // ===== BOOKING FORM =====
     const bookingForm = document.getElementById("bookingForm");
 
     if (!bookingForm) return;
 
 
-    // Update Booking Summary
+    // ===== UPDATE BOOKING SUMMARY =====
     function updateSummary(showNotification = false) {
 
         const match = document.getElementById("match").value;
@@ -92,7 +141,6 @@ document.addEventListener("DOMContentLoaded", function () {
             Number(document.getElementById("quantity").value) || 0;
 
         const price = prices[stand] || 0;
-
         const total = price * quantity;
 
         document.getElementById("summaryMatch").textContent =
@@ -113,7 +161,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    // Activity 7: Change Event Listeners
+    // Update summary when form values change
     document.getElementById("match").addEventListener("change", function () {
         updateSummary(true);
     });
@@ -127,17 +175,14 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 
-    // Save Booking in Table
+    // ===== SAVE BOOKING IN TABLE =====
     bookingForm.addEventListener("submit", function (event) {
 
         event.preventDefault();
 
         const match = document.getElementById("match").value;
         const stand = document.getElementById("stand").value;
-
-        const quantity =
-            Number(document.getElementById("quantity").value);
-
+        const quantity = Number(document.getElementById("quantity").value);
         const name = document.getElementById("name").value;
 
         const amount = prices[stand] * quantity;
@@ -163,30 +208,28 @@ document.addEventListener("DOMContentLoaded", function () {
         row.cells[2].textContent = match;
         row.cells[3].textContent = stand;
 
-        // Keep form details and show confirmation
         showToast("Booking added successfully!");
-
     });
 
 
-    // Initial Summary Update
+    // Initial booking summary
     updateSummary();
 
 });
 
 
-// Team Filter Function
+// ===== TEAM FILTER FUNCTION =====
 function filterMatches() {
 
     const filter = document.getElementById("teamFilter").value;
 
-    const rows = document.querySelectorAll("#matchTable tbody tr");
+    const cards = document.querySelectorAll(".match-card");
 
-    rows.forEach(function (row) {
+    cards.forEach(function (card) {
 
-        const teams = row.dataset.teams;
+        const teams = card.dataset.teams;
 
-        row.style.display =
+        card.style.display =
             filter === "all" || teams.includes(filter) ? "" : "none";
 
     });

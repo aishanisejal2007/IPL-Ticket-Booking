@@ -16,7 +16,14 @@
 <header>
     <nav>
         <h2>IPL TICKETS 🏏</h2>
-        <ul>
+
+        <button class="menu-toggle" id="menuToggle"
+                aria-label="Toggle navigation"
+                aria-expanded="false">
+            ☰
+        </button>
+
+        <ul id="navMenu">
             <li><a href="#matches">Matches</a></li>
             <li><a href="booking.html">Book Ticket</a></li>
             <li><a href="#mybookings">My Bookings</a></li>
@@ -65,66 +72,65 @@
 <section class="section" id="matches">
     <h2>Match Schedule</h2>
 
-    <label for="teamFilter">Filter by Team:</label>
+    <div class="match-controls">
+        <div>
+            <label for="teamFilter">Filter by Team:</label>
 
-    <select id="teamFilter">
-        <option value="all">All Teams</option>
-        <option value="CSK">Chennai Super Kings</option>
-        <option value="MI">Mumbai Indians</option>
-        <option value="RCB">Royal Challengers Bengaluru</option>
-        <option value="KKR">Kolkata Knight Riders</option>
-    </select>
+            <select id="teamFilter">
+                <option value="all">All Teams</option>
+                <option value="CSK">Chennai Super Kings</option>
+                <option value="MI">Mumbai Indians</option>
+                <option value="RCB">Royal Challengers Bengaluru</option>
+                <option value="KKR">Kolkata Knight Riders</option>
+            </select>
+        </div>
 
-    <div class="table-container">
-        <table id="matchTable">
-            <thead>
-                <tr>
-                    <th>Match No.</th>
-                    <th>Teams</th>
-                    <th>Date & Time</th>
-                    <th>Venue</th>
-                    <th>General</th>
-                    <th>Premium</th>
-                    <th>VIP</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
+        <div class="view-controls">
+            <button type="button" id="gridViewBtn" class="active-view">
+                Grid View
+            </button>
 
-            <tbody>
-                <tr data-teams="CSK MI">
-                    <td>1</td>
-                    <td>CSK vs MI</td>
-                    <td>10 April 2026, 7:30 PM</td>
-                    <td>Chennai</td>
-                    <td>₹800</td>
-                    <td>₹1500</td>
-                    <td>₹3000</td>
-                    <td><a href="#booking" class="book-btn">Book</a></td>
-                </tr>
+            <button type="button" id="listViewBtn">
+                List View
+            </button>
+        </div>
+    </div>
 
-                <tr data-teams="RCB KKR">
-                    <td>2</td>
-                    <td>RCB vs KKR</td>
-                    <td>12 April 2026, 7:30 PM</td>
-                    <td>Bengaluru</td>
-                    <td>₹1000</td>
-                    <td>₹2000</td>
-                    <td>₹4000</td>
-                    <td><a href="#booking" class="book-btn">Book</a></td>
-                </tr>
+    <div class="match-grid" id="matchGrid">
 
-                <tr data-teams="MI RCB">
-                    <td>3</td>
-                    <td>MI vs RCB</td>
-                    <td>15 April 2026, 7:30 PM</td>
-                    <td>Mumbai</td>
-                    <td>₹900</td>
-                    <td>₹1800</td>
-                    <td>₹3500</td>
-                    <td><a href="#booking" class="book-btn">Book</a></td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="match-card" data-teams="CSK MI">
+            <h3>Match No.: 1</h3>
+            <h3>CSK vs MI</h3>
+            <p><strong>Date & Time:</strong> 10 April 2026, 7:30 PM</p>
+            <p><strong>Venue:</strong> Chennai</p>
+            <p><strong>General:</strong> ₹800</p>
+            <p><strong>Premium:</strong> ₹1500</p>
+            <p><strong>VIP:</strong> ₹3000</p>
+            <a href="#booking" class="book-btn">Book</a>
+        </div>
+
+        <div class="match-card" data-teams="RCB KKR">
+            <h3>Match No.: 2</h3>
+            <h3>RCB vs KKR</h3>
+            <p><strong>Date & Time:</strong> 12 April 2026, 7:30 PM</p>
+            <p><strong>Venue:</strong> Bengaluru</p>
+            <p><strong>General:</strong> ₹1000</p>
+            <p><strong>Premium:</strong> ₹2000</p>
+            <p><strong>VIP:</strong> ₹4000</p>
+            <a href="#booking" class="book-btn">Book</a>
+        </div>
+
+        <div class="match-card" data-teams="MI RCB">
+            <h3>Match No.: 3</h3>
+            <h3>MI vs RCB</h3>
+            <p><strong>Date & Time:</strong> 15 April 2026, 7:30 PM</p>
+            <p><strong>Venue:</strong> Mumbai</p>
+            <p><strong>General:</strong> ₹900</p>
+            <p><strong>Premium:</strong> ₹1800</p>
+            <p><strong>VIP:</strong> ₹3500</p>
+            <a href="#booking" class="book-btn">Book</a>
+        </div>
+
     </div>
 </section>
 
@@ -188,24 +194,26 @@
 <section class="section" id="mybookings">
     <h2>My Ticket Bookings</h2>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Booking ID</th>
-                <th>Name</th>
-                <th>Match</th>
-                <th>Category</th>
-                <th>Tickets</th>
-                <th>Amount</th>
-            </tr>
-        </thead>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Booking ID</th>
+                    <th>Name</th>
+                    <th>Match</th>
+                    <th>Category</th>
+                    <th>Tickets</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
 
-        <tbody id="bookingRecords">
-            <tr>
-                <td colspan="6">No bookings yet.</td>
-            </tr>
-        </tbody>
-    </table>
+            <tbody id="bookingRecords">
+                <tr>
+                    <td colspan="6">No bookings yet.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </section>
 
 <!-- Guidelines -->
