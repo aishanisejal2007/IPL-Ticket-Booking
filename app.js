@@ -1,4 +1,3 @@
-
 // Reusable Toast Notification Function
 function showToast(message) {
 
@@ -51,7 +50,6 @@ document.addEventListener("DOMContentLoaded", function () {
             const bookingSection = document.getElementById("booking");
 
             if (bookingSection) {
-
                 bookingSection.scrollIntoView({
                     behavior: "smooth"
                 });
@@ -85,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // Update Booking Summary
-    function updateSummary() {
+    function updateSummary(showNotification = false) {
 
         const match = document.getElementById("match").value;
         const stand = document.getElementById("stand").value;
@@ -94,6 +92,8 @@ document.addEventListener("DOMContentLoaded", function () {
             Number(document.getElementById("quantity").value) || 0;
 
         const price = prices[stand] || 0;
+
+        const total = price * quantity;
 
         document.getElementById("summaryMatch").textContent =
             match || "Not selected";
@@ -105,11 +105,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
         document.getElementById("summaryQuantity").textContent = quantity;
 
-        document.getElementById("total").textContent = price * quantity;
+        document.getElementById("total").textContent = total;
+
+        if (showNotification) {
+            showToast("Booking summary updated!");
+        }
     }
 
 
-    bookingForm.addEventListener("input", updateSummary);
+    // Activity 7: Change Event Listeners
+    document.getElementById("match").addEventListener("change", function () {
+        updateSummary(true);
+    });
+
+    document.getElementById("stand").addEventListener("change", function () {
+        updateSummary(true);
+    });
+
+    document.getElementById("quantity").addEventListener("change", function () {
+        updateSummary(true);
+    });
 
 
     // Save Booking in Table
@@ -148,14 +163,13 @@ document.addEventListener("DOMContentLoaded", function () {
         row.cells[2].textContent = match;
         row.cells[3].textContent = stand;
 
+        // Keep form details and show confirmation
         showToast("Booking added successfully!");
 
-        bookingForm.reset();
-
-        updateSummary();
     });
 
 
+    // Initial Summary Update
     updateSummary();
 
 });
